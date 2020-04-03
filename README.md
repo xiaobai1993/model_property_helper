@@ -69,7 +69,34 @@ class PeopleModel extends Model
 
 }
 ```
+效果如下
 
+```
+use think\Model;
+
+/**
+ * 人物表（投资者/创业者）
+ * @property $guid   人物的guid
+ * @property $publish_status   发布状态
+ * @property $full_name   用户名称
+ * @property $english_name   中文名称
+ * @property $gender   性别
+ * @property $byline   个性签名
+ * @property $avatar_image   头像
+ * @property $date_of_birth   出生日期
+ * @property $contact_wechat   微信
+ * @property $is_entrepreneur   是否是创业
+ * @property $claimed_by   认领人
+ * @property $claimed_at   认领时间
+ * @property $career_data   CareerModel[]   人物的工作经历数据
+ * @property $profile_data   ProfileModel   个人的详细信息
+ * @property $logo_full_path   头像的完整路径
+ */
+
+class PeopleModel extends Model
+{
+
+```
 
 
 
