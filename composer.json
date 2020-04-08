@@ -4,7 +4,6 @@
     "type": "library",
     "require": {
         "topthink/framework": ">=5.0.0",
-        "xiaobai/mph": "dev-master"
     },
     "license": "MIT",
     "authors": [
@@ -13,7 +12,7 @@
             "email": "824955445@qq.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "xiaobai\\think\\command\\": "src"
