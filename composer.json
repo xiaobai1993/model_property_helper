@@ -2,9 +2,6 @@
     "name": "xiaobai/mph",
     "description": "一个基于thinkphp的command类实现的用于给model自动增加或者更新属性注释的工具。",
     "type": "library",
-    "require": {
-        "topthink/framework": ">=5.0.0"
-    },
     "license": "MIT",
     "authors": [
         {
