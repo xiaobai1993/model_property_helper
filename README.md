@@ -19,6 +19,12 @@
 composer require  xiaobai/mph 
 ```
 
+然后在command.php文件增加配置
+
+```
+'amp' => \xiaobai\think\command\ModelProperty::class,
+```
+
 完成以后
 
 ```
