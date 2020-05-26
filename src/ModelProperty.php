@@ -77,8 +77,10 @@ class ModelProperty extends Command
                         $this->parseTableAttr($instance, $comments);
                         $this->parseClass($instance, $comments);
                         $classComments = "\n\n/**\n" . implode("\n", $comments) . "\n*/\n\n";
-                        $result = preg_replace('/^([\s\S]*;)([\s\S]*?)(class.*?extends[\s\S]*)$/', "$1$classComments$3", $fileContent);
-                        file_put_contents($filePath, $result);
+                        $headIdx = mb_strpos($fileContent,$classMatch[0]);
+                        $partOne =  mb_substr($fileContent,0,$headIdx) . $classComments;
+                        $partTwo = mb_substr($fileContent,$headIdx);
+                        file_put_contents($filePath, $partOne.$partTwo);
                     } else {
                         exception("$class 不是模型类");
                     }
