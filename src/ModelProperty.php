@@ -121,6 +121,11 @@ class ModelProperty extends Command
      * @param $model
      * @param $comments
      */
+    /**
+     * 获取模型文件的方法
+     * @param $model
+     * @param $comments
+     */
     protected function parseClass($model, &$comments)
     {
         $classReflect = new \ReflectionClass($model);
@@ -150,9 +155,9 @@ class ModelProperty extends Command
                         $relationModel = $match[2];
                         $propertyName = Loader::parseName($methodName, 0, false);
                         if ($relation == 'hasMany' || $relation == 'belongsToMany') {
-                            $comments[] = " * @property $" . $propertyName . self::$tabs . $relationModel . "[]" . self::$tabs . $this->getDocTitle($method->getDocComment());
+                            $comments[] = " * @property " . $relationModel . "[]" .' ' . $propertyName . self::$tabs . $this->getDocTitle($method->getDocComment());
                         } else {
-                            $comments[] = " * @property $" . $propertyName . self::$tabs . $relationModel . self::$tabs . $this->getDocTitle($method->getDocComment());
+                            $comments[] = " * @property " . $relationModel . ' ' . $propertyName . self::$tabs . $this->getDocTitle($method->getDocComment());
                         }
                     }
                 }
