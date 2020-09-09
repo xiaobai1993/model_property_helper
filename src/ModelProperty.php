@@ -77,10 +77,8 @@ class ModelProperty extends Command
                         $this->parseTableAttr($instance, $comments);
                         $this->parseClass($instance, $comments);
                         $classComments = "\n\n/**\n" . implode("\n", $comments) . "\n*/\n\n";
-                        $headIdx = mb_strpos($fileContent,$classMatch[0]);
-                        $partOne =  mb_substr($fileContent,0,$headIdx) . $classComments;
-                        $partTwo = mb_substr($fileContent,$headIdx);
-                        file_put_contents($filePath, $partOne.$partTwo);
+                        $result = preg_replace('/^([\s\S]*;)([\s\S]*?)(class.*?extends[\s\S]*)$/', "$1$classComments$3", $fileContent);
+                        file_put_contents($filePath, $result);
                     } else {
                         exception("$class 不是模型类");
                     }
@@ -121,11 +119,6 @@ class ModelProperty extends Command
      * @param $model
      * @param $comments
      */
-    /**
-     * 获取模型文件的方法
-     * @param $model
-     * @param $comments
-     */
     protected function parseClass($model, &$comments)
     {
         $classReflect = new \ReflectionClass($model);
@@ -155,9 +148,9 @@ class ModelProperty extends Command
                         $relationModel = $match[2];
                         $propertyName = Loader::parseName($methodName, 0, false);
                         if ($relation == 'hasMany' || $relation == 'belongsToMany') {
-                            $comments[] = " * @property " . $relationModel . "[]" .' ' . $propertyName . self::$tabs . $this->getDocTitle($method->getDocComment());
+                            $comments[] = " * @property $" . $relationModel . "[]" . self::$tabs . $propertyName . self::$tabs . $this->getDocTitle($method->getDocComment());
                         } else {
-                            $comments[] = " * @property " . $relationModel . ' ' . $propertyName . self::$tabs . $this->getDocTitle($method->getDocComment());
+                            $comments[] = " * @property $" .  $relationModel . self::$tabs .$propertyName . self::$tabs . $this->getDocTitle($method->getDocComment());
                         }
                     }
                 }
